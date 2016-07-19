@@ -8,7 +8,8 @@
     "npm": "3.9.x"
   },
   "scripts": {
-    "test": "na"
+    "test": "na",
+    "start": "node web.js"
   },
   "repository": {
     "type": "git",
