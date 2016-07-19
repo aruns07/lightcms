@@ -7,6 +7,7 @@ app.get('/carousel', function(req, res){
 	res.send('carousel data');
 });
 
-app.listen(3000, function() {
-	console.log('App listening on port 3000!');
+let port = process.env.port || 3000;
+app.listen(port, function() {
+	console.log('App listening on port '+ port);
 });

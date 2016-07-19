@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "use contentfull cms",
   "main": "web.js",
+  "engines": {
+    "node": "6.2.x",
+    "npm": "3.9.x"
+  },
   "scripts": {
     "test": "na"
   },
