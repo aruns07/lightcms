@@ -1,0 +1,25 @@
+{
+  "name": "lightcms",
+  "version": "0.1.0",
+  "description": "use contentfull cms",
+  "main": "web.js",
+  "scripts": {
+    "test": "na"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aruns07/lightcms.git"
+  },
+  "keywords": [
+    "cms"
+  ],
+  "author": "arun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aruns07/lightcms/issues"
+  },
+  "homepage": "https://github.com/aruns07/lightcms#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
