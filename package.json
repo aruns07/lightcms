@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/aruns07/lightcms#readme",
   "dependencies": {
+    "contentful": "^3.5.0",
     "express": "^4.14.0"
   }
 }
