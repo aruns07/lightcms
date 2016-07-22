@@ -1,0 +1,14 @@
+<div class="carousel">
+	{{#each items}}
+	<div class="slide">
+		<image src="{{resolveAsset fields.image.sys.id ../includes/Asset}}" alt=""/>
+		{{#if fields.showText}}
+			<div class="card">
+				<h2>{{fields.title}}</h2>
+				<p>{{fields.description}}</p>
+				<a href="{{fields.linkurl}}">read more</a>
+			</div>
+		{{/if}}
+	</div>
+	{{/each}}
+</div>
