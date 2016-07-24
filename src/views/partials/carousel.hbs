@@ -1,14 +1,16 @@
-<div class="carousel">
+<div class="cms-carousel">
 	{{#each items}}
-	<div class="slide">
-		<image src="{{resolveAsset fields.image.sys.id ../includes/Asset}}" alt=""/>
-		{{#if fields.showText}}
-			<div class="card">
-				<h2>{{fields.title}}</h2>
-				<p>{{fields.description}}</p>
-				<a href="{{fields.linkurl}}">read more</a>
-			</div>
-		{{/if}}
+	<div class="cms-slide {{#if isFirst}} current{{/if}}">
+		<div class="cms-slide-content">
+			<image class="cms-image" src="{{resolveAsset fields.image.sys.id ../includes/Asset}}" alt=""/>
+			{{#if fields.showText}}
+				<div class="cms-card">
+					<h2 class="cms-heading">{{fields.title}}</h2>
+					<p class="cms-description">{{fields.description}}</p>
+					<a class="cms-link" href="{{fields.linkurl}}">read more</a>
+				</div>
+			{{/if}}
+		</div>
 	</div>
 	{{/each}}
 </div>

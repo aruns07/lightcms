@@ -1,30 +1,11 @@
 'use strict';
 
-
+let util = require('./server/util');
 let express = require('express');
 let exphbs = require('express-handlebars');
 let app = express();
 
-//Handlebars configuration
-app.engine('.hbs', exphbs({
-		defaultLayout: 'main',
-		extname: '.hbs',
-		layoutsDir: 'dist/views/layouts/',
-		partialsDir: 'dist/views/partials/',
-		helpers: {
-			resolveAsset: function(assetId, collection) {
-				for(let asset of collection) {
-					console.log(assetId, '££££££££ : ', JSON.stringify(asset.sys.id));
-					if(asset.sys.id === assetId) {
-						return asset.fields.file.url;
-					}
-				}
-				return 'Not found';
-			}
-		}
-	}));
-app.set('views','dist/views');
-app.set('view engine', '.hbs');
+require('./server/handlebars-config')(app, exphbs);
 
 //Contentfull configuration
 let contentful = require('contentful');
@@ -41,6 +22,7 @@ app.get('/', (req, res) => {
 			content_type: 'carouselType'
 		})
 		.then((entry) => {
+			entry.items = util.identifyFirst(entry.items);
 			res.render('home', entry);
 		})
 		.catch((error) => { 

@@ -1,7 +1,8 @@
 let gulp = require('gulp'),
 	eslint = require('gulp-eslint'),
 	webpack = require('gulp-webpack'),
-	del = require('del');;
+	del = require('del');
+	less = require('gulp-less');
 
 
 gulp.task('lint', () => {
@@ -36,6 +37,12 @@ gulp.task('script', () => {
 			.pipe(gulp.dest('dist/'));
 });
 
+gulp.task('style', () => {
+	return gulp.src('src/style/**/*.less')
+			.pipe(less())
+			.pipe(gulp.dest('dist/style/'));
+});
+
 gulp.task('other', () => {
 	return gulp.src('src/views/**/*')
 			.pipe(gulp.dest('dist/views'));
@@ -43,7 +50,7 @@ gulp.task('other', () => {
 
 gulp.task('clean', del.bind(null, ['dist/**']));
 
-gulp.task('build', [ 'lint', 'script', 'other']);
+gulp.task('build', [ 'lint', 'script', 'style', 'other']);
 
 gulp.task('default', ['clean'], () => {
 	gulp.start('build');
