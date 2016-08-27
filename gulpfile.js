@@ -1,9 +1,12 @@
 let gulp = require('gulp'),
 	eslint = require('gulp-eslint'),
-	webpack = require('gulp-webpack'),
-	del = require('del');
-	less = require('gulp-less');
-
+	webpack = require('webpack'),
+	gulpWebpack = require('webpack-stream'),
+	del = require('del'),
+	less = require('gulp-less'),
+	cssnano = require('gulp-cssnano'),
+	autoprefixer = require('gulp-autoprefixer');
+	plumber = require('gulp-plumber');
 
 gulp.task('lint', () => {
 	return gulp.src('src/script/**/*.js')
@@ -24,22 +27,49 @@ gulp.task('lint', () => {
 
 gulp.task('script', () => {
 	return gulp.src('src/script/main.js')
-			.pipe(webpack({
+			.pipe(gulpWebpack({
 				output: {
-					filename: 'main.js'
+					filename: 'main.js',
+					sourceMapFilename: 'main.js.map'
 				},
 				resolve: {
 					alias: {
 						handlebars: 'handlebars/dist/handlebars.min.js'
 					}
-				}
-			}))
+				},
+				module: {
+					loaders: [
+					  {
+					    test: /\.js$/,
+					    exclude: /(node_modules)/,
+					    loader: 'babel',
+					    query: {
+					      presets: ['es2015']
+					    }
+					  }
+					]
+				},
+				plugins: [
+			        new webpack.optimize.UglifyJsPlugin({
+			            compress: {
+			                warnings: false,
+			            },
+			            output: {
+			                comments: false,
+			                semicolons: true,
+			            }
+			        })
+			    ],
+				devtool: 'source-map'
+			}, webpack))
 			.pipe(gulp.dest('dist/'));
 });
 
 gulp.task('style', () => {
 	return gulp.src('src/style/**/*.less')
 			.pipe(less())
+			.pipe(autoprefixer())
+			.pipe(cssnano())
 			.pipe(gulp.dest('dist/style/'));
 });
 
